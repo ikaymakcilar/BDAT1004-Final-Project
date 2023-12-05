@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            background: url('/static/btc.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <!-- Bootstrap Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">BTC APP</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/data">Bitcoin Data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard">Dashboard</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/api-documentation">API Documentation</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-5 p-4" style="background-color: rgba(255, 255, 255, 0.9);">
+        <h1>Welcome to the API Documentation</h1>
+        <p>This documentation provides information on how to use the API endpoints.</p>
+
+        <h2>API Endpoints</h2>
+        <p></p>
+
+        <p><strong>Get All Items:</strong></p>
+        <p><code>GET /api/items</code></p>
+        <p>Retrieves a list of all items.</p>
+
+        <h3>Example Request:</h3>
+        <pre class="request-section json-output">
+            <code class="centered-code">http://127.0.0.1:8000/api/items</code>
+        </pre>
+
+        <h3>Example Output:</h3>
+        <pre class="response-section json-output">
+            [
+                {
+                    "_id": "656a8a89808d7238d6de0651",
+                    "date": "Sat, 02 Sep 2023 22:00:14 GMT",
+                    "price": 25863.6019089
+                },
+                {
+                    "_id": "656a8a89808d7238d6de0652",
+                    "date": "Sat, 02 Sep 2023 23:00:55 GMT",
+                    "price": 25861.17109121785
+                },
+                {
+                    "_id": "656a8a8a808d7238d6de0653",
+                    "date": "Sun, 03 Sep 2023 00:00:43 GMT",
+                    "price": 25850.426267510193
+                },
+                {
+                    "_id": "656a8a8a808d7238d6de0654",
+                    "date": "Sun, 03 Sep 2023 01:00:26 GMT",
+                    "price": 25875.5583470379
+                },
+                {
+                    "_id": "656a8a8a808d7238d6de0655",
+                    "date": "Sun, 03 Sep 2023 02:00:09 GMT",
+                    "price": 25892.652704479053
+                }, ...
+            ]
+        </pre>
+    
+        <p><strong>Get Items in Range:</strong></p>
+        <p><code>GET /api/items/range?start=YYYY-MM-DD&end=YYYY-MM-DD</code></p>
+        <p>Retrieves items within the specified date range.</p>
+
+        <h3>Example Request:</h3>
+        <pre class="request-section json-output">
+            <code class="centered-code">http://127.0.0.1:8000/api/items/range?start=2023-11-25&end=2023-11-26</code>
+        </pre>
+
+        <h3>Example Output:</h3>
+        <pre class="response-section json-output">
+            [
+                {
+                  "_id": "656a8bb6808d7238d6de0e1c",
+                  "date": "Sat, 25 Nov 2023 00:00:17 GMT",
+                  "price": 37801.38886126128
+                },
+                {
+                  "_id": "656a8bb6808d7238d6de0e1d",
+                  "date": "Sat, 25 Nov 2023 01:00:51 GMT",
+                  "price": 37820.24727366895
+                },
+                {
+                  "_id": "656a8bb6808d7238d6de0e1e",
+                  "date": "Sat, 25 Nov 2023 02:00:46 GMT",
+                  "price": 37806.05244160949
+                },
+                {
+                  "_id": "656a8bb6808d7238d6de0e1f",
+                  "date": "Sat, 25 Nov 2023 03:00:07 GMT",
+                  "price": 37831.33106264941
+                },
+                {
+                  "_id": "656a8bb6808d7238d6de0e20",
+                  "date": "Sat, 25 Nov 2023 04:01:22 GMT",
+                  "price": 37794.76842895799
+                }, ...
+            ]
+        </pre>
+
+        <p><strong>Get Item by ID:</strong></p>
+        <p><code>GET /api/items/&lt;id&gt; </code></p>
+        <p>Retrieves an item by its ID.</p>
+
+        <h3>Example Request:</h3>
+        <pre class="request-section json-output">
+            <code class="centered-code">http://127.0.0.1:8000/api/items/656a8a89808d7238d6de0651</code>
+        </pre>
+
+        <h3>Example Output:</h3>
+        <pre class="response-section json-output">
+            {
+                "_id": "656a8a89808d7238d6de0651",
+                "date": "Sat, 02 Sep 2023 22:00:14 GMT",
+                "price": 25863.6019089
+            }
+        </pre>
+    </div>
+    <!-- Footer -->
+    <div class="footer-placeholder"></div>
+    <footer class="footer bg-dark text-white">
+        <div class="container text-center">
+            <span>&copy; 2023 BTC APP. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <!-- Include Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
+

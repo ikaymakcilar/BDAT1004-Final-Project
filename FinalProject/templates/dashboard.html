@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            background: url('/static/btc.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
+     <div id="curve_chart" style="width: 100%; height: 1300px;">
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <script type="text/javascript">
+                google.charts.load('current', {'packages': ['corechart']});
+                google.charts.setOnLoadCallback(drawChart);
+            
+                function drawChart() {
+                    var chartData = {{ chartData_json | safe }}; // Access chartData from Flask
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('date', 'Date');
+                    data.addColumn('number', 'Bitcoin Price');
+            
+                    // Populate data rows from chartData
+                    for (var i = 0; i < chartData.length; i++) {
+                        data.addRow([new Date(chartData[i][0]), chartData[i][1]]);
+                    }
+            
+                    var options = {
+                        title: 'Bitcoin Data',
+                        curveType: 'function',
+                        legend: { position: 'bottom' },
+                        hAxis: {
+                            slantedText: true,
+                            slantedTextAngle: 45,
+                            gridlines: { count: 5 } // Display only 5 gridlines and labels
+                        }
+                    };
+                    var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+                    chart.draw(data, options);
+                }
+            </script>
+            </div>
+</head>
+<body>
+    <!-- Bootstrap Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">BTC APP</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/data">Bitcoin Data</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/dashboard">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/api-documentation">API Documentation</a>
+                </li>
+            </ul>
+        </div>
+    </nav>      
+    <!-- Footer -->
+    <div class="footer-placeholder"></div>
+    <footer class="footer bg-dark text-white">
+        <div class="container text-center">
+            <span>&copy; 2023 BTC APP. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <!-- Include Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
