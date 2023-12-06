@@ -33,13 +33,10 @@ def dashboard():
     # Format data for JavaScript
     chartData = []
     for entry in data_from_mongodb:
-        # Assuming 'date' is a field in your MongoDB document
         date = entry['date']
-        # Assuming 'price' is a field in your MongoDB document
         price = entry['price']
         
         formatted_date = date.strftime('%Y-%m-%d %H:%M:%S')# Format the data and add it to chartData
-        #formatted_date = date.strftime('%Y-%m-%d')  # Format date as 'Y-m-d'
         chartData.append([formatted_date, price])  # Convert date to string and keep price as-is
 
     # Convert chartData to a JSON string
