@@ -19,29 +19,35 @@
                 google.charts.setOnLoadCallback(drawChart);
             
                 function drawChart() {
-                    var chartData = {{ chartData_json | safe }}; // Access chartData from Flask
+                    var chartData = {{ chartData_json | safe }}; // Retrieve chart data from a Flask server. The data is marked as 'safe' for HTML rendering.
+
                     var data = new google.visualization.DataTable();
-                    data.addColumn('date', 'Date');
-                    data.addColumn('number', 'Bitcoin Price');
-            
-                    // Populate data rows from chartData
+                    data.addColumn('date', 'Date'); // Add a column for date values.
+                    data.addColumn('number', 'Bitcoin Price'); // Add a column for numeric values representing Bitcoin prices.
+
+                    // Loop through each entry in chartData and add it as a row to the DataTable.
                     for (var i = 0; i < chartData.length; i++) {
                         data.addRow([new Date(chartData[i][0]), chartData[i][1]]);
                     }
-            
+                
                     var options = {
-                        title: 'Bitcoin Data',
-                        curveType: 'function',
-                        legend: { position: 'bottom' },
+                        title: 'Bitcoin Data', // Chart title.
+                        curveType: 'function', // Line chart will be drawn as a smooth curve.
+                        legend: { position: 'bottom' }, // Position the legend at the bottom of the chart.
                         hAxis: {
-                            slantedText: true,
-                            slantedTextAngle: 45,
-                            gridlines: { count: 5 } // Display only 5 gridlines and labels
+                            slantedText: true, // Slant the horizontal axis text for better readability.
+                            slantedTextAngle: 45, // Angle of slant for the axis text.
+                            gridlines: { count: 5 } // Show only 5 gridlines on the horizontal axis for clarity.
                         }
                     };
+                
+                    // Create a LineChart object, targeting the HTML element with id 'curve_chart'.
                     var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+                
+                    // Draw the chart with the specified data and options.
                     chart.draw(data, options);
                 }
+
             </script>
         </div>
 </head>

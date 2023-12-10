@@ -15,11 +15,11 @@ collection = db1["bitcoinHistoricalData"]
 def get_all_items():
     # Retrieve a list of documents (items) from the MongoDB collection
     items = list(collection.find())
-
+    items.reverse()
     # Convert ObjectId to string for each item in the list
     # This ensures that the '_id' field is serializable to JSON
     items = [{**item, '_id': str(item['_id'])} for item in items]
-
+    
     # Return the list of items as a JSON response
     return jsonify(items)
 
